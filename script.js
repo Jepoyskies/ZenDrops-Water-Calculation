@@ -78,7 +78,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <input type="number" class="amount20" id="amount20-${tripCounter}" placeholder='""'>
                     </div>
                     <div class="form-group">
-                        <input type="text" class="brand-new-info" placeholder="Brand New (e.g., 1 brand new gallon 180)">
+                        <input type="text" class="brand-new-info" placeholder="Brand New (e.g., 1 brand new 180)">
                     </div>
 
                     <div class="calculation-display">
@@ -148,11 +148,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const tripTotal = (amount25 * 25) + (amount20 * 20) + brandNewPrice;
         const gallonsSold = gallonsEffectivelyDelivered - totalNonSales;
         const expectedEmpties = gallonsEffectivelyDelivered - brandNewCount - totalPickUps - totalNonSales;
-        
-        // --- NEW CALCULATION FOR TOTAL PHYSICAL RETURNED ---
         const totalPhysicalReturned = expectedEmpties + returnedUnopened;
 
-        // Update all display fields
         tripCard.querySelector('.trip-total').textContent = tripTotal;
         tripCard.querySelector('.gallons-sold-display').textContent = gallonsSold;
         tripCard.querySelector('.expected-empties-display').textContent = expectedEmpties;
@@ -166,13 +163,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const tripCard = e.target.closest('.trip-card');
         if (!tripCard) return;
 
+        // --- UPDATED VALIDATION LOGIC ---
         if (e.target.matches('.amount25, .amount20')) {
             const delivered = parseInt(tripCard.querySelector('.delivered-gallons').value) || 0;
             const returnedUnopened = parseInt(tripCard.querySelector('.returned-unopened').value) || 0;
             const nonSalesNotes = tripCard.querySelector('.free-notes');
             const totalNonSales = sumNonSalesFromNotes(nonSalesNotes);
+            const brandNewText = tripCard.querySelector('.brand-new-info').value;
+            const brandNewCount = parseInt(brandNewText) || 0;
             
-            const gallonsAvailableForSale = (delivered - returnedUnopened) - totalNonSales;
+            // The max number of regular sales is how many were delivered, minus returns, freebies, AND brand new sales.
+            const gallonsAvailableForSale = (delivered - returnedUnopened) - totalNonSales - brandNewCount;
 
             let amount25 = Number(tripCard.querySelector('.amount25').value) || 0;
             let amount20 = Number(tripCard.querySelector('.amount20').value) || 0;
