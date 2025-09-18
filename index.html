@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Water Delivery Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div class="page-container">
+    <div class="main-content">
+        <header>
+            <h1>Daily Delivery Report</h1>
+        </header>
+
+        <div id="trips-container">
+            <!-- Trip cards will be dynamically inserted here by JavaScript -->
+        </div>
+
+        <button id="add-trip-btn" class="add-trip-btn">Add Another Trip</button>
+    </div>
+
+    <aside class="sidebar">
+        <div class="financial-summary">
+            <div class="financial-card">
+                <h3>Expenses</h3>
+                <textarea id="expenses-notes" placeholder="e.g.&#10;100 load&#10;390 karne"></textarea>
+                <div class="financial-total">
+                    <span>Total:</span>
+                    <span id="expenses-total">0</span>
+                </div>
+            </div>
+
+            <div class="financial-card">
+                <h3>Credits Today (Deduct)</h3>
+                <textarea id="credits-today-notes" placeholder="e.g.&#10;75 Monteverde&#10;60 bombom"></textarea>
+                <div class="financial-total">
+                    <span>Total:</span>
+                    <span id="credits-today-total">0</span>
+                </div>
+            </div>
+
+            <div class="financial-card">
+                <h3>Credits Paid Today (Add)</h3>
+                <textarea id="credits-paid-notes" placeholder="e.g.&#10;115 salidahay&#10;20 sumagaysay"></textarea>
+                <div class="financial-total">
+                    <span>Total:</span>
+                    <span id="credits-paid-total">0</span>
+                </div>
+            </div>
+            
+            <div class="financial-card">
+                <h3>Remaining Credits (Notes)</h3>
+                <textarea id="remaining-credits-notes" placeholder="e.g.&#10;500 tito jay&#10;225 tito marvin"></textarea>
+                <div class="financial-total">
+                    <span>Total:</span>
+                    <span id="remaining-credits-total">0</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="final-tally">
+            <h2>Final Calculation</h2>
+            <div class="tally-item">
+                <span>Total Deductions:</span>
+                <span id="deductions-total">0</span>
+            </div>
+            <div class="tally-item final-cash">
+                <span>FINAL CASH:</span>
+                <span id="cash-on-hand-total">0</span>
+            </div>
+        </div>
+    </aside>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
